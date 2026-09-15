@@ -1,0 +1,17 @@
+# SGR Bot dependencies
+# Install: pip install -r requirements.txt
+
+# Core browser automation
+playwright>=1.44.0
+
+# Browser stealth (hides navigator.webdriver and other bot fingerprints)
+playwright-stealth>=1.0.6
+
+# Async HTTP client for direct API polling (much lighter than browser reloads)
+aiohttp>=3.9.0
+
+# Optional: CAPTCHA solver (only needed if Cloudflare challenges appear)
+# 2captcha-python>=1.2.0
+
+# Standard library modules used (no install needed):
+#   asyncio, re, imaplib, email, json, ssl, sys, pathlib, random, datetime

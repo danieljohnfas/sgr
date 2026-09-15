@@ -1,0 +1,14 @@
+venv/
+__pycache__/
+sessions/
+archive/
+*.png
+*.html
+state*.json
+phone_pool_state.json
+otp.txt
+control_number.txt
+working_proxies.txt
+.pytest_cache/
+*.pyc
+.canvas.data.json
