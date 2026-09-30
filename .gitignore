@@ -12,3 +12,6 @@ working_proxies.txt
 .pytest_cache/
 *.pyc
 .canvas.data.json
+book_log.txt
+working_proxy*.txt
+.claude/
