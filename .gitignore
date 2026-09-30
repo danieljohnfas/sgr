@@ -13,5 +13,5 @@ working_proxies.txt
 *.pyc
 .canvas.data.json
 book_log.txt
-working_proxy*.txt
+working_prox*.txt
 .claude/
