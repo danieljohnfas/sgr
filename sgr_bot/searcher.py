@@ -104,29 +104,35 @@ async def fill_search_form(page) -> bool:
     try:
         print(f"[Searcher] Filling form {config.BOARDING_STATION_NAME} -> "
               f"{config.LANDING_STATION_NAME} on {config.TRAVEL_DATE}...")
-        await page.wait_for_timeout(1500)
+        await page.wait_for_timeout(3000)
 
-        await page.locator(selectors.BOARDING_SELECT).click()
-        await page.wait_for_timeout(500)
+        # Boarding station
+        boarding = page.locator(selectors.BOARDING_SELECT)
+        await boarding.wait_for(state="visible", timeout=20000)
+        await boarding.click()
+        await page.wait_for_timeout(600)
         await page.keyboard.type(config.BOARDING_STATION_NAME)
-        await page.wait_for_timeout(400)
+        await page.wait_for_timeout(600)
         opt = page.locator(f".ng-option:has-text('{config.BOARDING_STATION_NAME}')").first
         try:
-            await opt.click(timeout=5000)
+            await opt.click(timeout=8000)
         except Exception:
             await page.keyboard.press("Enter")
-        await page.wait_for_timeout(400)
+        await page.wait_for_timeout(600)
 
-        await page.locator(selectors.LANDING_SELECT).click()
-        await page.wait_for_timeout(500)
+        # Landing station
+        landing = page.locator(selectors.LANDING_SELECT)
+        await landing.wait_for(state="visible", timeout=10000)
+        await landing.click()
+        await page.wait_for_timeout(600)
         await page.keyboard.type(config.LANDING_STATION_NAME)
-        await page.wait_for_timeout(400)
+        await page.wait_for_timeout(600)
         opt = page.locator(f".ng-option:has-text('{config.LANDING_STATION_NAME}')").first
         try:
-            await opt.click(timeout=5000)
+            await opt.click(timeout=8000)
         except Exception:
             await page.keyboard.press("Enter")
-        await page.wait_for_timeout(400)
+        await page.wait_for_timeout(600)
 
         await page.click(selectors.CALENDAR_BTN)
         await page.wait_for_timeout(500)
@@ -178,7 +184,7 @@ async def _dismiss_swal(page):
 async def search_once(page) -> Optional[SeatResult]:
     await _dismiss_swal(page)
     async with page.expect_response(
-        lambda r: "SearchTrip" in r.url, timeout=30_000
+        lambda r: "SearchTrip" in r.url, timeout=60_000
     ) as resp_info:
         await page.click(selectors.SEARCH_BTN, timeout=10_000)
     resp = await resp_info.value
